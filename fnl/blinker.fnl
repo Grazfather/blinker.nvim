@@ -44,9 +44,10 @@
   (insert_highlights)
 
   ; Set up auto command to auto re-setup highlights when the colorscheme changes
-  (vim.cmd "augroup BlinkerInitHighlight
-           autocmd! ColorScheme * lua require('blinker').insert_highlights()
-           augroup end")
+  (vim.api.nvim_create_autocmd
+    "ColorScheme"
+    {:group (vim.api.nvim_create_augroup "BlinkerInitHighlight" {:clear true})
+     :callback (fn [] ((. (require "blinker") :insert_highlights)))})
 
   ; And now we are setup
   (set initialized true))
