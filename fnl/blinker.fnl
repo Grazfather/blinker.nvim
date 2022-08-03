@@ -7,8 +7,7 @@
                :highlight "BlinkingLine"})
 
 (fn insert_highlights []
-  (vim.api.nvim_command
-    (.. ":highlight BlinkingLine ctermbg=" options.color " guibg=" options.color)))
+  (vim.api.nvim_set_hl 0 "BlinkingLine" {:bg options.color}))
 
 (fn blink_cursorline []
   (if initialized

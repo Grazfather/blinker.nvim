@@ -3,7 +3,7 @@ local initialized = false
 local options = nil
 local defaults = {count = 2, duration = 100, color = "white", highlight = "BlinkingLine"}
 local function insert_highlights()
-  return vim.api.nvim_command((":highlight BlinkingLine ctermbg=" .. options.color .. " guibg=" .. options.color))
+  return vim.api.nvim_set_hl(0, "BlinkingLine", {bg = options.color})
 end
 local function blink_cursorline()
   if initialized then
