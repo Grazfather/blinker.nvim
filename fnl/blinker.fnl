@@ -11,21 +11,13 @@
 
 (fn blink_cursorline []
   (if initialized
-    (let [bufnr (vim.api.nvim_get_current_buf)
-          ; TODO: This isn't perfect, since it counts the gutters, so on wrapped
-          ; lines it'll actually go to the next line if line numbers or any
-          ; gutter is visible.
-          winwidth (vim.api.nvim_win_get_width 0)
+    (let [winwidth (vim.api.nvim_win_get_width 0)
           start (vim.api.nvim_win_get_cursor 0)
           startx (- (. start 1) 1)
-          start [startx 0]
-          finish [startx winwidth]
-          on-fn (fn [] (if (vim.api.nvim_buf_is_valid bufnr)
-                         (vim.highlight.range
-                           bufnr ns options.highlight start finish "V" false)))
-          off-fn (fn [] (if (vim.api.nvim_buf_is_valid bufnr)
-                          (vim.api.nvim_buf_clear_namespace bufnr ns 0 -1)))
-          ]
+          on-fn (fn [] (if (vim.api.nvim_buf_is_valid 0)
+                         (vim.api.nvim_buf_add_highlight 0 ns options.highlight startx 0 -1)))
+          off-fn (fn [] (if (vim.api.nvim_buf_is_valid 0)
+                          (vim.api.nvim_buf_clear_namespace 0 ns 0 -1)))]
       (on-fn)
       (vim.defer_fn off-fn options.duration)
       (for [i 2 (* 2 (- options.count 1)) 2]

@@ -7,16 +7,13 @@ local function insert_highlights()
 end
 local function blink_cursorline()
   if initialized then
-    local bufnr = vim.api.nvim_get_current_buf()
     local winwidth = vim.api.nvim_win_get_width(0)
     local start = vim.api.nvim_win_get_cursor(0)
     local startx = (start[1] - 1)
-    local start0 = {startx, 0}
-    local finish = {startx, winwidth}
     local on_fn
     local function _1_()
-      if vim.api.nvim_buf_is_valid(bufnr) then
-        return vim.highlight.range(bufnr, ns, options.highlight, start0, finish, "V", false)
+      if vim.api.nvim_buf_is_valid(0) then
+        return vim.api.nvim_buf_add_highlight(0, ns, options.highlight, startx, 0, -1)
       else
         return nil
       end
@@ -24,8 +21,8 @@ local function blink_cursorline()
     on_fn = _1_
     local off_fn
     local function _3_()
-      if vim.api.nvim_buf_is_valid(bufnr) then
-        return vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
+      if vim.api.nvim_buf_is_valid(0) then
+        return vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
       else
         return nil
       end
