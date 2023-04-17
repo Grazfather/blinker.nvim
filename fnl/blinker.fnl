@@ -45,7 +45,5 @@
 
 {: setup
  : blink_cursorline
- : ns
- : initialized
  : insert_highlights
  : options}

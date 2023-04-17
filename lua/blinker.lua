@@ -51,4 +51,4 @@ local function setup(opts)
   initialized = true
   return nil
 end
-return {setup = setup, blink_cursorline = blink_cursorline, ns = ns, initialized = initialized, insert_highlights = insert_highlights, options = options}
+return {setup = setup, blink_cursorline = blink_cursorline, insert_highlights = insert_highlights, options = options}
