@@ -45,7 +45,7 @@ local function setup(opts)
   options = vim.tbl_deep_extend("force", {}, defaults, opts)
   insert_highlights()
   local function _6_()
-    return (require("blinker")).insert_highlights()
+    return insert_highlights()
   end
   vim.api.nvim_create_autocmd("ColorScheme", {group = vim.api.nvim_create_augroup("BlinkerInitHighlight", {clear = true}), callback = _6_})
   initialized = true

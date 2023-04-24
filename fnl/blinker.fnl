@@ -38,7 +38,7 @@
   (vim.api.nvim_create_autocmd
     "ColorScheme"
     {:group (vim.api.nvim_create_augroup "BlinkerInitHighlight" {:clear true})
-     :callback #((. (require "blinker") :insert_highlights))})
+     :callback #(insert_highlights)})
 
   ; And now we are setup
   (set initialized true))
