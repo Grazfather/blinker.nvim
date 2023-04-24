@@ -14,10 +14,10 @@
     (let [winwidth (vim.api.nvim_win_get_width 0)
           start (vim.api.nvim_win_get_cursor 0)
           startx (- (. start 1) 1)
-          on-fn (fn [] (if (vim.api.nvim_buf_is_valid 0)
-                         (vim.api.nvim_buf_add_highlight 0 ns options.highlight startx 0 -1)))
-          off-fn (fn [] (if (vim.api.nvim_buf_is_valid 0)
-                          (vim.api.nvim_buf_clear_namespace 0 ns 0 -1)))]
+          on-fn #(if (vim.api.nvim_buf_is_valid 0)
+                  (vim.api.nvim_buf_add_highlight 0 ns options.highlight startx 0 -1))
+          off-fn #(if (vim.api.nvim_buf_is_valid 0)
+                    (vim.api.nvim_buf_clear_namespace 0 ns 0 -1))]
       (on-fn)
       (vim.defer_fn off-fn options.duration)
       (for [i 2 (* 2 (- options.count 1)) 2]
@@ -38,7 +38,7 @@
   (vim.api.nvim_create_autocmd
     "ColorScheme"
     {:group (vim.api.nvim_create_augroup "BlinkerInitHighlight" {:clear true})
-     :callback (fn [] ((. (require "blinker") :insert_highlights)))})
+     :callback #((. (require "blinker") :insert_highlights))})
 
   ; And now we are setup
   (set initialized true))
