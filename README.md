@@ -2,6 +2,8 @@
 
 __blinker.nvim__ is a dead simple nvim plugin that allows you to easily find your cursor.
 
+![demo](demo.gif)
+
 ## Installation
 ### Packer
 ```lua
