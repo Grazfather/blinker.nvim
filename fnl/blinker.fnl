@@ -29,7 +29,7 @@
 
 (fn setup [opts]
   ; Merge opts & defaults into our options
-  (set options (vim.tbl_deep_extend :force {} defaults opts))
+  (set options (vim.tbl_deep_extend :force defaults opts))
 
   ; Set up highlights
   (insert_highlights)
@@ -38,7 +38,7 @@
   (vim.api.nvim_create_autocmd
     "ColorScheme"
     {:group (vim.api.nvim_create_augroup "BlinkerInitHighlight" {:clear true})
-     :callback #(insert_highlights)})
+     :callback insert_highlights})
 
   ; And now we are setup
   (set initialized true))

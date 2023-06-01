@@ -42,12 +42,9 @@ local function blink_cursorline()
   end
 end
 local function setup(opts)
-  options = vim.tbl_deep_extend("force", {}, defaults, opts)
+  options = vim.tbl_deep_extend("force", defaults, opts)
   insert_highlights()
-  local function _6_()
-    return insert_highlights()
-  end
-  vim.api.nvim_create_autocmd("ColorScheme", {group = vim.api.nvim_create_augroup("BlinkerInitHighlight", {clear = true}), callback = _6_})
+  vim.api.nvim_create_autocmd("ColorScheme", {group = vim.api.nvim_create_augroup("BlinkerInitHighlight", {clear = true}), callback = insert_highlights})
   initialized = true
   return nil
 end
