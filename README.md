@@ -5,6 +5,14 @@ __blinker.nvim__ is a dead simple nvim plugin that allows you to easily find you
 ![demo](demo.gif)
 
 ## Installation
+### lazy.nvim
+```lua
+{
+  "Grazfather/blinker.nvim",
+  config = true
+}
+```
+
 ### Packer
 ```lua
 use({'Grazfather/blinker.nvim'})
