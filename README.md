@@ -38,9 +38,13 @@ vim.api.nvim_set_keymap("n", "<leader>x",
                         "<cmd>lua require('blinker').blink_cursorline({:count 5 :duration 50})<CR>")
 
 -- Set it to blink on certain events
-vim.cmd("augroup BlinkSwitch
-        autocmd! WinEnter * lua require('blinker').blink_cursorline()
-	augroup end")
+group = vim.api.nvim_create_augroup("BlinkSwitch", {clear = true})
+vim.api.nvim_create_autocmd({"WinEnter"},
+                            {pattern = "*",
+                             callback = function()
+                               require("blinker").blink_cursorline()
+                             end,
+                             group = group})
 ```
 
 ## Configuration
